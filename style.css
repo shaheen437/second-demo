@@ -1,0 +1,120 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins, sans-serif;
+}
+
+body{
+  background:#fff5ea;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:1.5rem;
+}
+
+.hide{display:none;}
+
+/* HAPPY POP */
+#happy{
+  font-size:3.5rem;
+  opacity:0;
+  transform:scale(0.5);
+}
+
+#happy.pop{
+  opacity:1;
+  transform:scale(1);
+  transition:0.6s ease;
+}
+
+/* WISH */
+#wish{
+  max-width:38rem;
+  font-size:1.1rem;
+  line-height:1.7rem;
+  color:#444;
+  min-height:6rem;
+}
+
+/* BUTTON */
+button{
+  padding:0.9rem 2.2rem;
+  border:none;
+  border-radius:2rem;
+  background:#ff6f91;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+/* TITLES */
+.title{
+  font-size:2rem;
+  font-family:cursive;
+  color:#b35d5d;
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  max-width:70rem;
+}
+
+.gallery img{
+  width:100%;
+  height:20rem;
+  object-fit:cover;
+  border-radius:1rem;
+  opacity:0;
+  transform:translateY(2rem);
+  transition:0.6s;
+}
+
+.gallery img.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* VIDEO */
+video{
+  width:80%;
+  max-width:45rem;
+  border-radius:1.5rem;
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  top:-1rem;
+  width:0.6rem;
+  height:0.6rem;
+  animation:fall linear infinite;
+  z-index:9999;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+  }
+}
+/* FINAL WISH PAGE */
+.final-wish{
+  max-width:40rem;
+  font-size:1.2rem;
+  line-height:1.9rem;
+  color:#555;
+  padding:1rem 1.5rem;
+  background:#fff;
+  border-radius:1.5rem;
+  box-shadow:0 0.8rem 2rem rgba(0,0,0,0.08);
+}

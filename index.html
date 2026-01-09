@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 🎉</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="bgmusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg"> 
+</audio>
+<audio id="typingSound"><source src="typing.mp3"></audio>
+<audio id="clickSound"><source src="click.mp3"></audio>
+
+<!-- PAGE 1 -->
+<section id="page1">
+  <h1 id="happy">Happy B'day Dear🎉</h1>
+  <div id="wish"></div>
+  <button onclick="goToGallery()">Start the Celebration 🎊</button>
+</section>
+
+<!-- PAGE 2 -->
+<section id="page2" class="hide">
+  <h2 class="title">Just him ✨</h2>
+
+  <div class="gallery">
+    <img src="p1.jpg"><img src="p2.jpg"><img src="p3.jpg"><img src="p4.jpg">
+    <img src="p5.jpg"><img src="p6.jpg"><img src="p7.jpg"><img src="p8.jpg">
+  </div>
+
+  <button onclick="goToVideo()">One More Surprise 🎁</button>
+</section>
+
+<!-- PAGE 3 -->
+<section id="page3" class="hide">
+  <h2 class="title">Enjoy Your Day 🎂</h2>
+  <video id="reel" autoplay playsinline></video>
+</section>
+
+<!-- PAGE 4 -->
+<section id="page4" class="hide">
+  <h2 class="title">One Last Wish 🎊</h2>
+  <p class="final-wish">
+    On your special day, I wish you happiness, success and peace in everything you do.
+  May this year bring new opportunities, good memories and positive vibes into your life.
+  Keep smiling, stay confident and enjoy every moment of today.<br>
+ <b>Cheers to your personal new year 🎊</b>
+  </p>
+</section>
+</section>
+
+<script>
+/* ---------------- HAPPY POP ---------------- */
+window.onload = () => {
+  document.getElementById("happy").classList.add("pop");
+  startTyping();
+  startConfetti(); // ✅ confetti starts here
+  document.getElementById("bgmusic").play();
+};
+
+/* ---------------- WISH TYPING (3 sec) ---------------- */
+const wishText =
+"Hope this year brings you good health, success and lots of smiles.  "+
+"Keep growing, stay positive and enjoy every moment of your day. "+
+"Wishing you a great year ahead ✨";
+let i = 0;
+const wishBox = document.getElementById("wish");
+const typingSound = document.getElementById("bgmusic");
+const speed = 3000 / wishText.length;
+
+function startTyping(){
+  function type(){
+    if(i < wishText.length){
+      wishBox.innerHTML += wishText.charAt(i);
+      typingSound.currentTime = 0;
+      typingSound.play();
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+/* ---------------- CONFETTI (PAGE 1 & 2 ONLY) ---------------- */
+let confettiPieces = [];
+
+function startConfetti(){
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    c.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(c);
+    confettiPieces.push(c);
+  }
+}
+
+function stopConfetti(){
+  confettiPieces.forEach(c=>c.remove());
+  confettiPieces=[];
+}
+
+/* ---------------- BUTTONS ---------------- */
+const clickSound=document.getElementById("clickSound");
+
+function goToGallery(){
+  clickSound.play();
+  page1.classList.add("hide");
+  page2.classList.remove("hide");
+
+  document.querySelectorAll(".gallery img")
+    .forEach((img,idx)=>{
+      setTimeout(()=>img.classList.add("show"),idx*400);
+    });
+}
+
+function goToVideo(){
+  clickSound.play();
+  document.getElementById("bgmusic").pause();
+
+  stopConfetti(); // ❌ CONFETTI STOPPED BEFORE REEL
+
+  page2.classList.add("hide");
+  page3.classList.remove("hide");
+
+  const video=document.getElementById("reel");
+  video.src="reel.mp4";
+  video.muted=false;
+  video.controls=false;
+  video.play();
+  video.onended = () => {
+    page3.classList.add("hide");
+    page4.classList.remove("hide");
+  };
+}
+</script>
+
+</body>
+</html>
